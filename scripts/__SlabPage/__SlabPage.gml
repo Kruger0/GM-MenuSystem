@@ -3,7 +3,8 @@ function __SlabPage(data, manager) constructor{
     static cache = __SlabCache();
     
     __layer         = data.layer;
-    __nodeArray     = data.nodes;
+    
+    = data.nodes;
     __cycle         = data.config[$ "cycle"] ?? true;
     __manager       = manager;
     __styleSource   = SlabStyleResolve(manager.__style);

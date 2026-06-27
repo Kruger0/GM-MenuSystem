@@ -1,0 +1,11 @@
+{
+  "$GMNotes":"v1",
+  "%Name":"CoreDocs",
+  "name":"CoreDocs",
+  "parent":{
+    "name":"Slab",
+    "path":"folders/Slab.yy",
+  },
+  "resourceType":"GMNotes",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,66 @@
+SLAB ZONE DEFINITION
+====================
+
+Zones are named regions within a node used for drawing and interaction.
+A BODY zone covering the full node bounds is always emitted at index 0.
+
+
+ZONE FIELDS
+-----------
+
+name     string            optional  Zone identifier. Omit for layout-only containers.
+anchor   "LEFT" | "RIGHT"  "LEFT"    Which side the zone is pinned to.
+w        real | string     "fill"    Width. See sizing below.
+h        real | string     "fill"    Height. See sizing below.
+children array             optional  Nested zones resolved against this zone's bounds.
+
+
+SIZING VALUES
+-------------
+
+32       Fixed pixels
+"50%"    Fraction of parent width or height
+"fill"   Splits remaining space equally with other fill zones
+
+Vertical alignment is always centered.
+h smaller than parent offsets ry by (ph - rh) / 2.
+
+
+LAYOUT RULES
+------------
+
+- Fixed px resolved first, then percent, then fill gets the remainder
+- anchor LEFT zones consume from a left cursor, RIGHT from a right cursor
+- Unnamed zones with no children are pure space dividers, no rect emitted
+- Unnamed zones with children resolve their children against their own bounds
+
+
+EXAMPLES
+--------
+
+Button — implicit BODY only
+    zones = undefined
+
+Checkbox
+    zones = [
+        { name: "BOX", anchor: "RIGHT", w: 32 },
+    ]
+
+Selector
+    zones = [
+        { w: "50%" },
+        { w: "fill", children: [
+            { name: "LEFT",  anchor: "LEFT",  w: 32     },
+            { name: "VALUE", anchor: "LEFT",  w: "fill" },
+            { name: "RIGHT", anchor: "RIGHT", w: 32     },
+        ]},
+    ]
+
+Slider
+    zones = [
+        { w: "40%" },
+        { w: "fill", children: [
+            { name: "BAR",   anchor: "LEFT",  w: "fill", h: "80%" },
+            { name: "VALUE", anchor: "RIGHT", w: 48                },
+        ]},
+    ]

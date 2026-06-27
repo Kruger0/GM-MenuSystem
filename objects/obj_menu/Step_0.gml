@@ -1,5 +1,5 @@
 
-var _cr = cr_arrow
+var _cr = cr_arrow;
 switch (mainMenu.GetMouseState()) {
     case SLAB_MOUSE.INACTIVE:   _cr = cr_none; break;
     case SLAB_MOUSE.IDLE:       _cr = cr_arrow; break;
